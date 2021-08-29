@@ -14,8 +14,6 @@ public class BinaryTreeTest {
     static BinaryTree<Integer> B4 = new BinaryTree<>();
     static BinaryTree<Integer> B5 = new BinaryTree<>();
 
-
-
     @Test
     public void B1Test() {
         BinaryTree<Integer> B1 = new BinaryTree<>();

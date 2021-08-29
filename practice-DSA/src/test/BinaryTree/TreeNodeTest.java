@@ -1,10 +1,12 @@
 package test.BinaryTree;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.*;
 import app.BinaryTree.TreeNode;
 
+/**
+ * Created by DanyOlous on 29.08.2021.
+ */
 public class TreeNodeTest {
 
     @Test
@@ -62,13 +64,11 @@ public class TreeNodeTest {
         assertEquals(87, treeNode.getLeft().getData());
         assertEquals(89, treeNode.getRight().getData());
     }
-
     @Test
     public void print() {
         TreeNode<Integer> treeNode = new TreeNode<>(77, 87, 89);
         assertEquals("TreeNode{ data= 77 }", treeNode.toString());
     }
-
     @Test
     public void updateNode() {
         TreeNode<Integer> treeNode = new TreeNode<>();

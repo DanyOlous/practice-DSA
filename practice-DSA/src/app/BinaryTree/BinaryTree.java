@@ -92,19 +92,19 @@ public class BinaryTree<T> implements Iterable<TreeNode<T>> {
             keyNode.data = x;
         }
     }
-    public void removeMethod(TreeNode<T> delNode) {
+    public void removeMethod(TreeNode<T> node) {
         Queue<TreeNode<T>> queue = new LinkedList<TreeNode<T>>();
         queue.offer(root);
         TreeNode<T> temp = null;
         while (!queue.isEmpty()) {
             temp = queue.peek();
             queue.remove();         
-            if (temp == delNode) {
+            if (temp == node) {
                 temp = null;
                 return;
             }
             if (temp.right!=null) {
-                if (temp.right == delNode) {
+                if (temp.right == node) {
                     temp.right = null;
                     return;
                 }
@@ -112,7 +112,7 @@ public class BinaryTree<T> implements Iterable<TreeNode<T>> {
                     queue.offer(temp.right);
             }
             if (temp.left != null) {
-                if (temp.left == delNode) {
+                if (temp.left == node) {
                     temp.left = null;
                     return;
                 }
