@@ -68,4 +68,13 @@ public class TreeNodeTest {
         TreeNode<Integer> treeNode = new TreeNode<>(77, 87, 89);
         assertEquals("TreeNode{ data= 77 }", treeNode.toString());
     }
+
+    @Test
+    public void updateNode() {
+        TreeNode<Integer> treeNode = new TreeNode<>();
+        assertEquals(null, treeNode.getData());
+
+        treeNode.setData(57);
+        assertEquals(57, treeNode.getData());
+    }
 }

@@ -36,6 +36,10 @@ public class TreeNode<T> {
         return this.data;
     }
 
+    public void setData(T elt) {
+        this.data = elt;
+    }
+
     public TreeNode<T> getLeft() {
         return this.left;
     }
