@@ -31,6 +31,8 @@ public class BinaryTree<T> {
 
     public void insert(T elt)
     {
+        //TreeNode<T> tmp = root;
+        // use a queue
 
     }
 
@@ -39,9 +41,12 @@ public class BinaryTree<T> {
 
     }
 
-    public int height()
+    // Call method with root
+    public int height(TreeNode<T> node)
     {
-        return 0;
+        if (root == null)
+            return -1;
+        return 1 + Math.max(height(node.left), height(node.right));
     }
 
     public void postOrder()
