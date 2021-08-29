@@ -5,7 +5,7 @@ public class BinaryTree<T> {
 
     public BinaryTree()
     {
-
+        root = new TreeNode<T>();
     }
 
     public BinaryTree(T elt)
@@ -23,17 +23,43 @@ public class BinaryTree<T> {
     public BinaryTree(T elt, TreeNode<T> left, TreeNode<T> right)
     {
         root = new TreeNode<T>(elt);
-         = left;
+        root.left = left;
+        root.right = right;
     }
 
     //public BinaryTree(T elt, BinaryTree right)
 
-    public void add(T elt)
+    public void insert(T elt)
     {
 
     }
 
-    public void delete(T elt)
+    public void remove(T elt)
+    {
+
+    }
+
+    public int height()
+    {
+        return 0;
+    }
+
+    public void postOrder()
+    {
+
+    }
+
+    public void preOrder()
+    {
+
+    }
+
+    public void inOrder()
+    {
+
+    }
+
+    public void levelOrder()
     {
 
     }
