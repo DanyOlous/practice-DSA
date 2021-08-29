@@ -1,4 +1,4 @@
-package BinaryTree;
+package app.BinaryTree;
 
 import java.util.Iterator;
 import java.util.LinkedList;

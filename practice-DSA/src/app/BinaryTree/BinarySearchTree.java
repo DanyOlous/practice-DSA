@@ -1,4 +1,4 @@
-package BinaryTree;
+package app.BinaryTree;
 
 /**
  * Created by DanyOlous on 29.08.2021.

@@ -1,4 +1,4 @@
-package BinaryTree;
+package app.BinaryTree;
 
 /**
  * Created by DanyOlous on 29.08.2021.
@@ -28,6 +28,6 @@ public class TreeNode<T> {
 
     @Override
     public String toString() {
-        return "TreeNode{ data= " + data + " }";
+        return "TreeNode{ data= " + data.toString() + " }";
     }
 }
