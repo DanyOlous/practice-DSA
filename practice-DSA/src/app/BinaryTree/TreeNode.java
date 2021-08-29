@@ -26,6 +26,24 @@ public class TreeNode<T> {
         this.right = right;
     }
 
+    public TreeNode(T elt, T left, T right) {
+        data = elt;
+        this.left = new TreeNode<T>(left);
+        this.right = new TreeNode<T>(right);
+    }
+
+    public T getData() {
+        return this.data;
+    }
+
+    public TreeNode<T> getLeft() {
+        return this.left;
+    }
+
+    public TreeNode<T> getRight() {
+        return this.right;
+    }
+
     @Override
     public String toString() {
         return "TreeNode{ data= " + data.toString() + " }";

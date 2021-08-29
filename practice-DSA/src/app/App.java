@@ -1,7 +1,4 @@
 package app;
-import app.BinaryTree.BinarySearchTree;
-import app.BinaryTree.BinaryTree;
-import app.BinaryTree.TreeNode;
 
 public class App {
     public static void main(String[] args) throws Exception {
