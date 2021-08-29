@@ -31,42 +31,128 @@ public class BinaryTree<T> implements Iterable<TreeNode<T>> {
         root.right = right;
     }
 
-    public void insert(T elt) {
-        //TreeNode<T> tmp = root;
-        // use a queue
+    public TreeNode<T> getNode() {
+        return root;
     }
 
+    public void insert(T elt) {
+        TreeNode<T> currTreeNode = root;
+        if (currTreeNode == null || empty()) {
+            root = new TreeNode<T>(elt);
+            return;
+        }
+        Queue<TreeNode<T>> queue = new LinkedList<TreeNode<T>>();
+        queue.offer(currTreeNode);
+        while (!queue.isEmpty()) {
+            currTreeNode = queue.peek();
+            queue.poll();
+            if (currTreeNode.left == null) {
+                currTreeNode.left = new TreeNode<T>(elt);
+                break;
+            }
+            else
+                queue.offer(currTreeNode.left);
+            if (currTreeNode.right == null) {
+                currTreeNode.right = new TreeNode<T>(elt);
+                break;
+            }
+            else
+                queue.offer(currTreeNode.right);
+        }
+    }
+ 
     public void remove(T elt) {
-        // use iterator
+        if (root == null)
+            return;         
+        if (root.left == null && root.right == null) {
+            if (root.data == elt) {
+                root=null;
+                return;
+            }
+            else
+                return;
+        }
+        Queue<TreeNode<T>> queue = new LinkedList<TreeNode<T>>();
+        queue.add(root);
+        TreeNode<T> curNode = null;
+        TreeNode<T> keyNode = null;
+        while (!queue.isEmpty()) {
+            curNode = queue.peek();
+            queue.remove();         
+            if (curNode.data == elt)
+                keyNode = curNode; 
+            if (curNode.left != null)
+                queue.offer(curNode.left); 
+            if (curNode.right != null)
+                queue.offer(curNode.right);
+        }
+        if (keyNode != null) {
+            T x = curNode.data;
+            removeMethod(curNode);
+            keyNode.data = x;
+        }
+    }
+    public void removeMethod(TreeNode<T> delNode) {
+        Queue<TreeNode<T>> queue = new LinkedList<TreeNode<T>>();
+        queue.offer(root);
+        TreeNode<T> temp = null;
+        while (!queue.isEmpty()) {
+            temp = queue.peek();
+            queue.remove();         
+            if (temp == delNode) {
+                temp = null;
+                return;
+            }
+            if (temp.right!=null) {
+                if (temp.right == delNode) {
+                    temp.right = null;
+                    return;
+                }
+                else
+                    queue.offer(temp.right);
+            }
+            if (temp.left != null) {
+                if (temp.left == delNode) {
+                    temp.left = null;
+                    return;
+                }
+                else
+                    queue.offer(temp.left);
+            }
+        }
     }
 
     public boolean empty() {
-        return root == null;
+        return root.data == null;
     }
 
     public boolean contains(T elt) {
-        if (empty())
+        TreeNode<T> currTreeNode = root;
+        if (currTreeNode == null || empty())
             return false;
-        // use iterator
-        return false;
+        Iterator<TreeNode<T>> iterator = this.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().getData() == elt)
+                return true;
+        }
+        return iterator.hasNext();
     }
     
     public int height() {
         return heightMethod(root);
     }
-
     private int heightMethod(TreeNode<T> node) {
-        if (root == null)
+        if (node == null)
             return -1;
-        return 1 + Math.max(heightMethod(node.left), heightMethod(node.right));
+        else
+            return 1 + Math.max(heightMethod(node.left), heightMethod(node.right));
     }
 
     public int size() {
         return sizeMethod(root);
     }
-
     private int sizeMethod(TreeNode<T> node) {
-        if (empty())
+        if (node == null || empty())
             return 0;
         return (1 + sizeMethod(node.left) + sizeMethod(node.right));
     }
@@ -84,64 +170,68 @@ public class BinaryTree<T> implements Iterable<TreeNode<T>> {
         }
     }*/
 
-    // use iterators
-    public void postOrder() {
-        postOrderMethod(root);
+    public String postOrder() {
+        return postOrderMethod(root, new StringBuilder());
     }
-
-    private void postOrderMethod(TreeNode<T> node) {
-        if (empty())
-            return;
+    private String postOrderMethod(TreeNode<T> node, StringBuilder sb) {
+        if (node == null || empty())
+            return "";
         else {
-            postOrderMethod(node.left);
-            postOrderMethod(node.right);
-            System.out.println(node.data + " ");
+            postOrderMethod(node.left, sb);
+            postOrderMethod(node.right, sb);
+            sb.append(node.data.toString() + " ");
+            return sb.toString();
         }
     }
 
-    public void preOrder() {
-        preOrderMethod(root);
+    public String preOrder() {
+        return preOrderMethod(root, new StringBuilder());
     }
-
-    private void preOrderMethod(TreeNode<T> node) {
-        if (empty())
-            return;
+    private String preOrderMethod(TreeNode<T> node, StringBuilder sb) {
+        if (node == null ||empty())
+            return "";
         else {
-            System.out.println(node.data + " ");
-            preOrderMethod(node.left);
-            preOrderMethod(node.right);
+            sb.append(node.data.toString() + " ");
+            preOrderMethod(node.left, sb);
+            preOrderMethod(node.right, sb);
+            return sb.toString();
         }
     }
 
-    public void inOrder() {
-        inOrderMethod(root);
+    public String inOrder() {
+        return inOrderMethod(root, new StringBuilder());
     }
-
-    private void inOrderMethod(TreeNode<T> node) {
-        if (empty())
-            return;
+    private String inOrderMethod(TreeNode<T> node, StringBuilder sb) {
+        if (node == null || empty())
+            return "";
         else {
-            inOrderMethod(node.left);
-            System.out.println(node.data + " ");
-            inOrderMethod(node.right);
+            inOrderMethod(node.left, sb);
+            sb.append(node.data.toString() + " ");
+            inOrderMethod(node.right, sb);
+            return sb.toString();
         }
     }
 
-    // use a Queue
-    public void levelOrder() {
-        levelOrderMethod(root);
+    public String levelOrder() {
+        return levelOrderMethod(root);
     }
-
-    private void levelOrderMethod(TreeNode<T> node) {
-        Queue<TreeNode<T>> q = new LinkedList<>();
-        q.add(node);
-        while (!q.isEmpty())
-        {
-            TreeNode<T> curTreeNode = q.poll();
-            if (curTreeNode.left != null)
-                q.offer(curTreeNode.left);
-            if (curTreeNode.right != null)
-                q.offer(curTreeNode.right);
+    private String levelOrderMethod(TreeNode<T> node) {
+        if (empty())
+            return "";
+        else {
+            StringBuilder sb = new StringBuilder();
+            Queue<TreeNode<T>> q = new LinkedList<>();
+            q.add(node);
+            while (!q.isEmpty())
+            {
+                TreeNode<T> curTreeNode = q.poll();
+                sb.append(curTreeNode.data.toString() + " ");
+                if (curTreeNode.left != null)
+                    q.offer(curTreeNode.left);
+                if (curTreeNode.right != null)
+                    q.offer(curTreeNode.right);
+            }
+            return sb.toString();
         }
     }
 
