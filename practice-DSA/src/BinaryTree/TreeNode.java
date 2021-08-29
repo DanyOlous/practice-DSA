@@ -1,5 +1,8 @@
 package BinaryTree;
 
+/**
+ * Created by DanyOlous on 29.08.2021.
+ */
 public class TreeNode<T> {
     T data;
     TreeNode<T> left;
@@ -29,6 +32,6 @@ public class TreeNode<T> {
     @Override
     public String toString()
     {
-        return "";
+        return "TreeNode{ data= " + data + " }";
     }
 }
