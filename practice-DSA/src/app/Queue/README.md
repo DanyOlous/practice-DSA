@@ -1,0 +1,2 @@
+- [ ] implemntation using stacks
+- [ ] implementation using arraylist
