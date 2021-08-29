@@ -8,7 +8,7 @@ import java.util.Stack;
 /**
  * Created by DanyOlous on 29.08.2021.
  */
-public class BinaryTree<T> implements Iterable<TreeNode<T>> {
+public class BinaryTree<T> implements IBinaryTree<T>, Iterable<TreeNode<T>> {
     TreeNode<T> root;
 
     public BinaryTree() {
@@ -35,6 +35,7 @@ public class BinaryTree<T> implements Iterable<TreeNode<T>> {
         return root;
     }
 
+    @Override
     public void insert(T elt) {
         TreeNode<T> currTreeNode = root;
         if (currTreeNode == null || empty()) {
@@ -61,6 +62,7 @@ public class BinaryTree<T> implements Iterable<TreeNode<T>> {
         }
     }
  
+    @Override
     public void remove(T elt) {
         if (root == null)
             return;         
@@ -126,6 +128,7 @@ public class BinaryTree<T> implements Iterable<TreeNode<T>> {
         return root.data == null;
     }
 
+    @Override
     public boolean contains(T elt) {
         TreeNode<T> currTreeNode = root;
         if (currTreeNode == null || empty())
@@ -138,6 +141,7 @@ public class BinaryTree<T> implements Iterable<TreeNode<T>> {
         return iterator.hasNext();
     }
     
+    @Override
     public int height() {
         return heightMethod(root);
     }
@@ -148,6 +152,7 @@ public class BinaryTree<T> implements Iterable<TreeNode<T>> {
             return 1 + Math.max(heightMethod(node.left), heightMethod(node.right));
     }
 
+    @Override
     public int size() {
         return sizeMethod(root);
     }
@@ -170,6 +175,7 @@ public class BinaryTree<T> implements Iterable<TreeNode<T>> {
         }
     }*/
 
+    @Override
     public String postOrder() {
         return postOrderMethod(root, new StringBuilder());
     }
@@ -184,6 +190,7 @@ public class BinaryTree<T> implements Iterable<TreeNode<T>> {
         }
     }
 
+    @Override
     public String preOrder() {
         return preOrderMethod(root, new StringBuilder());
     }
@@ -198,6 +205,7 @@ public class BinaryTree<T> implements Iterable<TreeNode<T>> {
         }
     }
 
+    @Override
     public String inOrder() {
         return inOrderMethod(root, new StringBuilder());
     }
@@ -212,6 +220,7 @@ public class BinaryTree<T> implements Iterable<TreeNode<T>> {
         }
     }
 
+    @Override
     public String levelOrder() {
         return levelOrderMethod(root);
     }

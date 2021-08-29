@@ -2,9 +2,7 @@ package test.BinaryTree;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.*;
-import app.BinaryTree.TreeNode;
 import app.BinaryTree.BinarySearchTree;
-import app.BinaryTree.BinaryTree;
 
 /**
  * Created by DanyOlous on 29.08.2021.
