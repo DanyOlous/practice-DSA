@@ -1,12 +1,14 @@
 package BinaryTree;
 
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
  * Created by DanyOlous on 29.08.2021.
  */
-public class BinaryTree<T> {
+public class BinaryTree<T> implements Iterable<TreeNode<T>> {
     TreeNode<T> root;
 
     public BinaryTree() {
@@ -127,63 +129,76 @@ public class BinaryTree<T> {
 
     // use a Queue
     public void levelOrder() {
-
+        levelOrderMethod(root);
     }
 
-    private class PostOrder implements Iterator<TreeNode<T>> {
+    private void levelOrderMethod(TreeNode<T> node) {
+        Queue<TreeNode<T>> q = new LinkedList<>();
+        q.add(node);
+        while (!q.isEmpty())
+        {
+            TreeNode<T> curTreeNode = q.poll();
+            if (curTreeNode.left != null)
+                q.offer(curTreeNode.left);
+            if (curTreeNode.right != null)
+                q.offer(curTreeNode.right);
+        }
+    }
+
+    @Override
+    public Iterator<TreeNode<T>> iterator() {
+        return new depthOrderIterator(root);
+    }
+
+    /*@Override
+    public Iterator<TreeNode<T>> iterator() {
+        return new breadthOrderIterator(root);
+    }*/
+
+    private class depthOrderIterator implements Iterator<TreeNode<T>> {
         Stack<TreeNode<T>> stack = new Stack<TreeNode<T>>();
-        @Override
-        public boolean hasNext()
-        {
 
+        public depthOrderIterator(TreeNode<T> node) {
+            stack.push(node);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !stack.empty();
         }
 
         @Override
         public TreeNode<T> next()
         {
-
+            TreeNode<T> curTreeNode = stack.pop();
+            if (curTreeNode.left != null)
+                stack.push(curTreeNode.left);
+            if (curTreeNode.right != null)
+                stack.push(curTreeNode.right);
+            return curTreeNode;
         }
     }
 
-    private class PreOrder implements Iterator<TreeNode<T>> {
-        @Override
-        public boolean hasNext()
-        {
+    private class breadthOrderIterator implements Iterator<TreeNode<T>> {
+        Queue<TreeNode<T>> queue = new LinkedList<TreeNode<T>>();
 
+        public breadthOrderIterator(TreeNode<T> node) {
+            queue.offer(node);
         }
 
         @Override
-        public TreeNode<T> next()
-        {
-
-        }
-    }
-
-    private class InOrder implements Iterator<TreeNode<T>> {
-        @Override
-        public boolean hasNext()
-        {
-
+        public boolean hasNext() {
+            return !queue.isEmpty();
         }
 
         @Override
-        public TreeNode<T> next()
-        {
-
-        }
-    }
-
-    private class LevelOrder implements Iterator<TreeNode<T>> {
-        @Override
-        public boolean hasNext()
-        {
-
-        }
-
-        @Override
-        public TreeNode<T> next()
-        {
-
+        public TreeNode<T> next() {
+            TreeNode<T> curTreeNode = queue.poll();
+            if (curTreeNode.left != null)
+                queue.offer(curTreeNode);
+            if (curTreeNode.right != null)
+                queue.offer(curTreeNode);
+            return curTreeNode;
         }
     }
 }
