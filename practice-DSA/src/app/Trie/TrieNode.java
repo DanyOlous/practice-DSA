@@ -26,12 +26,21 @@ public class TrieNode {
         isWord = true;
     }
 
+    public void unsetIsWord() {
+        isWord = false;
+    }
+
     public int getFrequency() {
         return frequency;
     }
 
-    public void setFrequency() {
+    public void addFrequency() {
         frequency++;
+    }
+
+    public void reduceFrequency() {
+        //raise exception if frequency = 0 || frequency < 0
+        frequency--;
     }
 
     public Dictionary<Character, TrieNode> getChildren() {
