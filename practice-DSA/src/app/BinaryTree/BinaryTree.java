@@ -278,7 +278,7 @@ public class BinaryTree<T> implements IBinaryTree<T>, Iterable<TreeNode<T>> {
         }
     }
 
-    private class breadthOrderIterator implements Iterator<TreeNode<T>> {
+    /*private class breadthOrderIterator implements Iterator<TreeNode<T>> {
         Queue<TreeNode<T>> queue = new LinkedList<TreeNode<T>>();
 
         public breadthOrderIterator(TreeNode<T> node) {
@@ -299,5 +299,5 @@ public class BinaryTree<T> implements IBinaryTree<T>, Iterable<TreeNode<T>> {
                 queue.offer(curTreeNode);
             return curTreeNode;
         }
-    }
+    }*/
 }
